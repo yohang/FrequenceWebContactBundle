@@ -71,6 +71,9 @@ class DefaultController extends ContainerAware
     protected function getForm()
     {
 
-        return $this->container->get('form.factory')->create(new ContactType, new Contact);
+        return $this->container->get('form.factory')->create(
+            $this->container->get('frequence_web_contact.type'),
+            $this->container->get('frequence_web_contact.model')
+        );
     }
 }

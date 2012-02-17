@@ -4,17 +4,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="frequence_web_contact.example.class">FrequenceWeb\Bundle\ContactBundle\Example</parameter>
+        <parameter key="frequence_web_contact.type.class">FrequenceWeb\Bundle\ContactBundle\Form\ContactType</parameter>
+        <parameter key="frequence_web_contact.model.class">FrequenceWeb\Bundle\ContactBundle\Model\Contact</parameter>
     </parameters>
 
     <services>
-        <service id="frequence_web_contact.example" class="%frequence_web_contact.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
-        </service>
+        <service id="frequence_web_contact.type" class="%frequence_web_contact.type.class%" />
+        <service id="frequence_web_contact.model" class="%frequence_web_contact.model.class%" />
     </services>
-    -->
+
 </container>
