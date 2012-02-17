@@ -1,0 +1,5 @@
+contact:
+    submit:
+        button: Send
+        success: Your message has been successfully send
+        failure: Your message can't be send due to some errors

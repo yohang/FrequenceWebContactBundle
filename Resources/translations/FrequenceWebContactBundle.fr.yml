@@ -1,0 +1,5 @@
+contact:
+    submit:
+        button: Envoyer
+        success: Votre message a bien été envoyé
+        failure: Votre message ne peut être envoyé
