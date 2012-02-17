@@ -2,10 +2,12 @@
 
 namespace FrequenceWeb\Bundle\ContactBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension,
+    Symfony\Component\DependencyInjection\ContainerBuilder,
+    Symfony\Component\DependencyInjection\Loader,
+    Symfony\Component\Config\FileLocator;
+
+use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\ContactEvents;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -24,5 +26,17 @@ class FrequenceWebContactExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        $definition = $container->getDefinition('frequence_web_contact.email_listener');
+        $definition->addArgument($config);
+        if (true === $config['send_mails']) {
+            if (null === $config['to']) {
+                throw new \InvalidArgumentException('You have to define a "frequence_web_contact.to" address to use the email contact');
+            }
+            $definition->addTag(
+                'kernel.event_listener',
+                array('event' => ContactEvents::onMessageSubmit, 'method' => 'onMessageSubmit')
+            );
+        }
     }
 }

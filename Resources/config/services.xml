@@ -7,11 +7,15 @@
     <parameters>
         <parameter key="frequence_web_contact.type.class">FrequenceWeb\Bundle\ContactBundle\Form\ContactType</parameter>
         <parameter key="frequence_web_contact.model.class">FrequenceWeb\Bundle\ContactBundle\Model\Contact</parameter>
+        <parameter key="frequence_web_contact.email_listener.class">FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Listener\EmailContactListener</parameter>
     </parameters>
 
     <services>
         <service id="frequence_web_contact.type" class="%frequence_web_contact.type.class%" />
         <service id="frequence_web_contact.model" class="%frequence_web_contact.model.class%" />
+        <service id="frequence_web_contact.email_listener" class="%frequence_web_contact.email_listener.class%">
+            <argument type="service" id="mailer" />
+        </service>
     </services>
 
 </container>

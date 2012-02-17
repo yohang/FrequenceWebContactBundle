@@ -20,9 +20,15 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('frequence_web_contact');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('send_mails')->defaultTrue()->end()
+                ->scalarNode('to')->defaultValue(null)->end()
+                ->scalarNode('from')->defaultValue('no-reply@example.com')->end()
+                ->scalarNode('subject')->defaultValue('contact.message.new')
+            ->end()
+        ;
 
         return $treeBuilder;
     }

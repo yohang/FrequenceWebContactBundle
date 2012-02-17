@@ -7,7 +7,9 @@ use Symfony\Component\DependencyInjection\ContainerAware,
     Symfony\Component\HttpFoundation\Request,
     Symfony\Component\Form\Form;
 
-use FrequenceWeb\Bundle\ContactBundle\Form\ContactType,
+use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\MessageSubmitEvent,
+    FrequenceWeb\Bundle\ContactBundle\EventDispatcher\ContactEvents,
+    FrequenceWeb\Bundle\ContactBundle\Form\ContactType,
     FrequenceWeb\Bundle\ContactBundle\Model\Contact;
 
 /**
@@ -37,15 +39,23 @@ class DefaultController extends ContainerAware
         $form->bindRequest($request);
 
         if ($form->isValid()) {
+            // Send the event for message handling (send mail, add to DB, don't care)
+            $event = new MessageSubmitEvent($form->getData());
+            $this->container->get('event_dispatcher')->dispatch(ContactEvents::onMessageSubmit, $event);
+
+            // Let say the user it's ok
             $message = $this->container->get('translator')->trans('contact.submit.success', array(), 'FrequenceWebContactBundle');
             $this->container->get('session')->setFlash('success', $message);
 
+            // Redirect somewhere
             return new RedirectResponse($this->container->get('router')->generate('fw_contact_index'));
         }
 
+        // Let say the user there's a problem
         $message = $this->container->get('translator')->trans('contact.submit.failure', array(), 'FrequenceWebContactBundle');
         $this->container->get('session')->setFlash('error', $message);
 
+        // Errors ? Re-render the form
         return $this->renderFormResponse($form);
     }
 
@@ -70,7 +80,6 @@ class DefaultController extends ContainerAware
      */
     protected function getForm()
     {
-
         return $this->container->get('form.factory')->create(
             $this->container->get('frequence_web_contact.type'),
             $this->container->get('frequence_web_contact.model')
