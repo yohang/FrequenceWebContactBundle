@@ -4,7 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="FrequenceWebContactBundle_homepage" pattern="/hello/{name}">
+    <route id="fw_contact_index" pattern="/contact.html">
         <default key="_controller">FrequenceWebContactBundle:Default:index</default>
+    </route>
+
+    <route id="fw_contact_submit" pattern="/contact/submit.html">
+        <default key="_controller">FrequenceWebContactBundle:Default:submit</default>
+        <requirement key="_method">POST</requirement>
     </route>
 </routes>
