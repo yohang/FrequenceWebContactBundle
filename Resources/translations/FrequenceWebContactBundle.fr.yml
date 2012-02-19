@@ -3,3 +3,7 @@ contact:
         button: Envoyer
         success: Votre message a bien été envoyé
         failure: Votre message ne peut être envoyé
+    message:
+        new: 'Nouveau message de "%name%"'
+        sent:
+            new: Vous a envoyé un message

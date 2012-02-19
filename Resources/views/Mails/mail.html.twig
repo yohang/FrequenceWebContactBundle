@@ -1,0 +1,10 @@
+<h1>
+    {{ contact.name }} ({{ contact.email }})
+    {% trans from 'FrequenceWebContactBundle' %}contact.message.sent.you{% endtrans %} :
+</h1>
+
+<h2>{{ contact.subject }}</h2>
+
+<p>
+    {{ contact.body }}
+</p>
