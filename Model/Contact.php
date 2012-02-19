@@ -5,6 +5,8 @@ namespace FrequenceWeb\Bundle\ContactBundle\Model;
 /**
  * Class attached to the contact form. Represents data from it.
  * You can extend it, and / or make it an entity or a document.
+ *
+ * @author Yohan Giarelli <yohan@giarel.li>
  */
 class Contact
 {
