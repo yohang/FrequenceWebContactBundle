@@ -2,6 +2,11 @@
 
 namespace FrequenceWeb\Bundle\ContactBundle\EventDispatcher;
 
+/**
+ * Events that this bundle provides
+ *
+ * @author Yohan Giarelli <yohan@giarel.li>
+ */
 class ContactEvents
 {
     /**

@@ -14,6 +14,8 @@ use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\MessageSubmitEvent,
 
 /**
  * Contact controller
+ *
+ * @author Yohan Giarelli <yohan@giarel.li>
  */
 class DefaultController extends ContainerAware
 {

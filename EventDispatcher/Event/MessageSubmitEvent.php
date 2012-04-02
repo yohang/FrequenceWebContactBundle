@@ -8,6 +8,8 @@ use FrequenceWeb\Bundle\ContactBundle\Model\Contact;
 
 /**
  * This event is thrown each time an user send a message (Only and Only if validation pass)
+ *
+ * @author Yohan Giarelli <yohan@giarel.li>
  */
 class MessageSubmitEvent extends Event
 {
