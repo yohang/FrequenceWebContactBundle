@@ -1,0 +1,20 @@
+{
+    "name": "frequence-web/contact-bundle",
+    "description": "Event-based contact bundle",
+    "keywords": ["contact"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yohan Giarelli",
+            "homepage": "http://github.com/yohang"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.*"
+    },
+    "autoload": {
+        "psr-0": { "FrequenceWeb\\Bundle\\ContactBundle": "" }
+    },
+    "target-dir": "FrequenceWeb/Bundle/ContactBundle"
+}
