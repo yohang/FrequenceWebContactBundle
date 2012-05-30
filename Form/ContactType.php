@@ -3,7 +3,7 @@
 namespace FrequenceWeb\Bundle\ContactBundle\Form;
 
 use Symfony\Component\Form\AbstractType,
-    Symfony\Component\Form\FormBuilder;
+    Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * The contact form
@@ -13,10 +13,10 @@ use Symfony\Component\Form\AbstractType,
 class ContactType extends AbstractType
 {
     /**
-     * @param \Symfony\Component\Form\FormBuilder $builder
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param array $options
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', 'text')
