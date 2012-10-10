@@ -22,10 +22,14 @@ class DefaultController extends ContainerAware
     /**
      * Action that displays the contact form
      *
+     * @param  Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
+        $this->container->get('session')->set('_fw_contact_referer', $request->getUri());
+
         return $this->renderFormResponse($this->getForm());
     }
 
@@ -50,7 +54,7 @@ class DefaultController extends ContainerAware
             $this->container->get('session')->setFlash('success', $message);
 
             // Redirect somewhere
-            return new RedirectResponse($this->container->get('router')->generate('fw_contact_index'));
+            return new RedirectResponse($this->container->get('session')->get('_fw_contact_referer'));
         }
 
         // Let say the user there's a problem
