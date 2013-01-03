@@ -5,6 +5,7 @@ php:
   - 5.4
 
 before_script:
+  - curl -s https://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
 
 script: ./vendor/phpunit/phpunit/composer/bin/phpunit
