@@ -12,24 +12,28 @@ class Contact
 {
     /**
      * The sender name
+     *
      * @var string
      */
     protected $name;
 
     /**
      * The sender email
+     *
      * @var string
      */
     protected $email;
 
     /**
      * The message subject
+     *
      * @var string
      */
     protected $subject;
 
     /**
      * The message body
+     *
      * @var string
      */
     protected $body;

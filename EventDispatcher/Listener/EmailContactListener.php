@@ -2,10 +2,9 @@
 
 namespace FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Listener;
 
-use Symfony\Bundle\FrameworkBundle\Translation\Translator,
-    Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-
 use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\MessageSubmitEvent;
+use Symfony\Component\Templating\EngineInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Listener for contact events, that sends emails
@@ -20,12 +19,12 @@ class EmailContactListener
     protected $mailer;
 
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Translation\Translator
+     * @var TranslatorInterface
      */
     protected $translator;
 
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface
+     * @var EngineInterface
      */
     protected $templating;
 
@@ -35,12 +34,12 @@ class EmailContactListener
     protected $config;
 
     /**
-     * @param \Swift_Mailer $mailer
-     * @param \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface $templating
-     * @param \Symfony\Bundle\FrameworkBundle\Translation\Translator $translator
-     * @param array $config Configuration from DIC
+     * @param \Swift_Mailer       $mailer
+     * @param EngineInterface     $templating
+     * @param TranslatorInterface $translator
+     * @param array<string>       $config     Configuration from DIC
      */
-    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, Translator $translator, array $config)
+    public function __construct(\Swift_Mailer $mailer, EngineInterface $templating, TranslatorInterface $translator, array $config)
     {
         $this->mailer     = $mailer;
         $this->templating = $templating;
@@ -50,7 +49,8 @@ class EmailContactListener
 
     /**
      * Called when onMessageSubmit event is fired
-     * @param \FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\MessageSubmitEvent $event
+     *
+     * @param MessageSubmitEvent $event
      */
     public function onMessageSubmit(MessageSubmitEvent $event)
     {
@@ -65,8 +65,20 @@ class EmailContactListener
         $message->addFrom($this->config['from']);
         $message->addReplyTo($contact->getEmail(), $contact->getName());
         $message->addTo($this->config['to']);
-        $message->addPart($this->templating->render('FrequenceWebContactBundle:Mails:mail.html.twig', array('contact' => $contact)), 'text/html');
-        $message->addPart($this->templating->render('FrequenceWebContactBundle:Mails:mail.txt.twig', array('contact' => $contact)), 'text/plain');
+        $message->addPart(
+            $this->templating->render(
+                'FrequenceWebContactBundle:Mails:mail.html.twig',
+                array('contact' => $contact)
+            ),
+            'text/html'
+        );
+        $message->addPart(
+            $this->templating->render(
+                'FrequenceWebContactBundle:Mails:mail.txt.twig',
+                array('contact' => $contact)
+            ),
+            'text/plain'
+        );
 
         $this->mailer->send($message);
     }

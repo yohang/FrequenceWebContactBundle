@@ -2,9 +2,8 @@
 
 namespace FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event;
 
-use Symfony\Component\EventDispatcher\Event;
-
 use FrequenceWeb\Bundle\ContactBundle\Model\Contact;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * This event is thrown each time an user send a message (Only and Only if validation pass)
@@ -14,12 +13,12 @@ use FrequenceWeb\Bundle\ContactBundle\Model\Contact;
 class MessageSubmitEvent extends Event
 {
     /**
-     * @var \FrequenceWeb\Bundle\ContactBundle\Model\Contact
+     * @var Contact
      */
     protected $contact;
 
     /**
-     * @param \FrequenceWeb\Bundle\ContactBundle\Model\Contact $contact
+     * @param Contact $contact
      */
     public function __construct(Contact $contact)
     {
@@ -27,7 +26,7 @@ class MessageSubmitEvent extends Event
     }
 
     /**
-     * @return \FrequenceWeb\Bundle\ContactBundle\Model\Contact
+     * @return Contact
      */
     public function getContact()
     {
