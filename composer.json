@@ -1,8 +1,8 @@
 {
     "name": "frequence-web/contact-bundle",
-    "description": "Event-based contact bundle",
-    "keywords": ["contact"],
     "type": "symfony-bundle",
+    "description": "Event-based contact bundle",
+    "keywords": ["contact", "bundle", "event"],
     "license": "MIT",
     "authors": [
         {
@@ -11,7 +11,14 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "2.*"
+        "php":                      ">5.3.2",
+        "symfony/framework-bundle": ">=2.1,<2.3-dev"
+    },
+    "require-dev": {
+        "phpunit": "3.*@stable"
+    },
+    "suggest": {
+        "symfony/swiftmailer-bundle": "If your want to use the (default) mail listener."
     },
     "autoload": {
         "psr-0": { "FrequenceWeb\\Bundle\\ContactBundle": "" }
