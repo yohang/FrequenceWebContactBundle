@@ -1,2 +1,4 @@
 phpunit.xml
 vendor
+Tests/Functional/cache
+Tests/Functional/logs

@@ -9,17 +9,13 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-         bootstrap="./Tests/bootstrap.php"
+         bootstrap="./vendor/autoload.php"
 >
     <testsuites>
-        <testsuite name="AsseticBundle Test Suite">
+        <testsuite name="FrequenceWebContactBundle Test Suite">
             <directory>./Tests/</directory>
         </testsuite>
     </testsuites>
-
-    <php>
-        <!-- <server name="KERNEL_DIR" value="/path/to/your/app/app" /> -->
-    </php>
 
     <filter>
         <whitelist>
@@ -27,6 +23,7 @@
             <exclude>
                 <directory>./Resources</directory>
                 <directory>./Tests</directory>
+                <directory>./vendor</directory>
             </exclude>
         </whitelist>
     </filter>

@@ -2,7 +2,7 @@
 
 namespace FrequenceWeb\Bundle\ContactBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use FrequenceWeb\Bundle\ContactBundle\Tests\Functional\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
@@ -22,6 +22,8 @@ class DefaultControllerTest extends WebTestCase
             'contact[body]'    => 'This is my message body.',
         ));
         $client->submit($form);
+        $collector = $client->getProfile()->getCollector('swiftmailer');
+        $this->assertCount(0, $collector->getMessages());
 
         $this->assertNotInstanceOf('Symfony\\Component\\HttpFoundation\\RedirectResponse', $client->getResponse());
 
@@ -33,6 +35,9 @@ class DefaultControllerTest extends WebTestCase
             'contact[body]'    => 'This is my message body.',
         ));
         $client->submit($form);
+
+        $collector = $client->getProfile()->getCollector('swiftmailer');
+        $this->assertCount(1, $collector->getMessages());
 
         $this->assertInstanceOf('Symfony\\Component\\HttpFoundation\\RedirectResponse', $client->getResponse());
         $client->followRedirect();
