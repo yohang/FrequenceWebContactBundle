@@ -1,0 +1,2 @@
+frequence_web_contact:
+    resource: '@FrequenceWebContactBundle/Resources/config/routing.xml'
