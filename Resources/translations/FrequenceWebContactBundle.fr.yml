@@ -6,4 +6,4 @@ contact:
     message:
         new: 'Nouveau message de "%name%"'
         sent:
-            new: Vous a envoyé un message
+            you: Vous a envoyé un message
