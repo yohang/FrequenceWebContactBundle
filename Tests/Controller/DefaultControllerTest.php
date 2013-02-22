@@ -11,7 +11,7 @@ class DefaultControllerTest extends WebTestCase
         /** @var $client \Symfony\Bundle\FrameworkBundle\Client */
         $client = static::createClient();
         /** @var $crawler \Symfony\Component\DomCrawler\Crawler  */
-        $crawler = $client->request('GET', '/contact.html');
+        $crawler = $client->request('GET', '/contact');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
