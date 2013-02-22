@@ -49,7 +49,7 @@ class DefaultController extends ContainerAware
 
             // Let say the user it's ok
             $message = $this->container->get('translator')->trans('contact.submit.success', array(), 'FrequenceWebContactBundle');
-            $this->container->get('session')->setFlash('success', $message);
+            $this->container->get('session')->getFlashBag()->add('success', $message);
 
             // Redirect somewhere
             return new RedirectResponse($this->container->get('session')->get('_fw_contact_referer'));
@@ -57,7 +57,7 @@ class DefaultController extends ContainerAware
 
         // Let say the user there's a problem
         $message = $this->container->get('translator')->trans('contact.submit.failure', array(), 'FrequenceWebContactBundle');
-        $this->container->get('session')->setFlash('error', $message);
+        $this->container->get('session')->getFlashBag()->add('error', $message);
 
         // Errors ? Re-render the form
         return $this->renderFormResponse($form);
