@@ -1,8 +1,8 @@
 contact:
     submit:
         button: Send
-        success: Your message has been successfully send
-        failure: Your message can't be send due to some errors
+        success: Your message has been successfully sent
+        failure: Your message can't be sent due to errors
     message:
         new: 'New message from "%name%"'
         sent:
