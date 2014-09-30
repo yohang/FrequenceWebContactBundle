@@ -7,3 +7,8 @@ contact:
         new: 'New message from "%name%"'
         sent:
             you: Sent you a message
+form:
+    name: Name
+    email: Email
+    subject: Subject
+    body: Body

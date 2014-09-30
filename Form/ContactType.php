@@ -18,10 +18,18 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text')
-            ->add('email', 'email')
-            ->add('subject', 'text')
-            ->add('body', 'textarea')
+            ->add('name', 'text', array(
+                'label' => 'form.name',
+                'translation_domain' => 'FrequenceWebContactBundle'))
+            ->add('email', 'email', array(
+                'label' => 'form.email',
+                'translation_domain' => 'FrequenceWebContactBundle'))
+            ->add('subject', 'text', array(
+                'label' => 'form.subject',
+                'translation_domain' => 'FrequenceWebContactBundle'))
+            ->add('body', 'textarea', array(
+                'label' => 'form.body',
+                'translation_domain' => 'FrequenceWebContactBundle'))
         ;
     }
 
