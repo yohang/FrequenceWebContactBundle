@@ -4,7 +4,7 @@ namespace FrequenceWeb\Bundle\ContactBundle\Controller;
 
 use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\ContactEvents;
 use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\MessageSubmitEvent;
-use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author Yohan Giarelli <yohan@giarel.li>
  */
-class DefaultController extends ContainerAware
+class DefaultController extends Controller
 {
     /**
      * Action that displays the contact form
@@ -40,7 +40,7 @@ class DefaultController extends ContainerAware
     public function submitAction(Request $request)
     {
         $form = $this->getForm();
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             // Send the event for message handling (send mail, add to DB, don't care)
@@ -54,7 +54,10 @@ class DefaultController extends ContainerAware
             // Redirect somewhere
             return new RedirectResponse($this->container->get('session')->get('_fw_contact_referer'));
         }
-
+        
+        $normData = $this->get('serializer')->serialize($form->getNormData(), 'json');
+        $this->get('logger')->error("[FREQUENCE] Error to send email " . $normData);
+        
         // Let say the user there's a problem
         $message = $this->container->get('translator')->trans('contact.submit.failure', array(), 'FrequenceWebContactBundle');
         $this->container->get('session')->getFlashBag()->add('error', $message);
