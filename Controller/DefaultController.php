@@ -3,6 +3,7 @@
 namespace FrequenceWeb\Bundle\ContactBundle\Controller;
 
 use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\ContactEvents;
+use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\ErrorMessageSubmit;
 use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\MessageSubmitEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -53,10 +54,10 @@ class DefaultController extends Controller
 
             // Redirect somewhere
             return new RedirectResponse($this->container->get('session')->get('_fw_contact_referer'));
+        }else{
+            $event = new ErrorMessageSubmit($form->getData());
+            $this->container->get('event_dispatcher')->dispatch(ContactEvents::onErrorMessageSubmit, $event);
         }
-        
-        $normData = $this->get('serializer')->serialize($form->getNormData(), 'json');
-        $this->get('logger')->error("[FREQUENCE] Error to send email " . $normData);
         
         // Let say the user there's a problem
         $message = $this->container->get('translator')->trans('contact.submit.failure', array(), 'FrequenceWebContactBundle');
