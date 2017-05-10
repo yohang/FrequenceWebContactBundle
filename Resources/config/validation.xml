@@ -10,7 +10,7 @@
         <property name="email">
             <constraint name="NotBlank" />
             <constraint name="Email">
-                <option name="checkMX">true</option>
+                <option name="checkMX">false</option>
             </constraint>
         </property>
         <property name="subject">
