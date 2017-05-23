@@ -43,7 +43,7 @@ class DefaultController implements ContainerAwareInterface
     public function submitAction(Request $request)
     {
         $form = $this->getForm();
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             // Send the event for message handling (send mail, add to DB, don't care)
@@ -89,7 +89,7 @@ class DefaultController implements ContainerAwareInterface
     protected function getForm()
     {
         return $this->container->get('form.factory')->create(
-            $this->container->get('frequence_web_contact.type'),
+            $this->container->getParameter('frequence_web_contact.type'),
             $this->container->get('frequence_web_contact.model')
         );
     }
