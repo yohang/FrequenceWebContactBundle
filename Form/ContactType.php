@@ -3,6 +3,9 @@
 namespace FrequenceWeb\Bundle\ContactBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -18,16 +21,16 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
+            ->add('name', TextType::class, array(
                 'label' => 'form.name',
                 'translation_domain' => 'FrequenceWebContactBundle'))
-            ->add('email', 'email', array(
+            ->add('email', EmailType::class, array(
                 'label' => 'form.email',
                 'translation_domain' => 'FrequenceWebContactBundle'))
-            ->add('subject', 'text', array(
+            ->add('subject', TextType::class, array(
                 'label' => 'form.subject',
                 'translation_domain' => 'FrequenceWebContactBundle'))
-            ->add('body', 'textarea', array(
+            ->add('body', TextareaType::class, array(
                 'label' => 'form.body',
                 'translation_domain' => 'FrequenceWebContactBundle'))
         ;
