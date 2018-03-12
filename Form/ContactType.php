@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
+
 /**
  * The contact form
  *
@@ -33,6 +35,10 @@ class ContactType extends AbstractType
             ->add('body', TextareaType::class, array(
                 'label' => 'form.body',
                 'translation_domain' => 'FrequenceWebContactBundle'))
+            ->add('recaptcha', EWZRecaptchaType::class, array(
+                'label' => false,
+                'mapped' => false,
+            ))
         ;
     }
 
