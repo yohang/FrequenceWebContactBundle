@@ -43,6 +43,19 @@ frequence_web_contact:
 
 ```
 
+Also yo can create a fixed select to split emails via multiple departaments
+
+```yaml
+
+frequence_web_contact:
+    send_mails: true                # True to use the bundle EmailListener that send emails when contact form is submited
+    from:       null                # The contact mail sender
+    fixed_to_and_subject:
+      - { title: "Departarment 1", email:  "departament1@example.com" }
+      - { title: "Departarment 2", email:  "departament2@example.com" }
+      - { title: "Departarment 3", email:  "departament3@example.com" }
+```
+
 Routing
 -------
 

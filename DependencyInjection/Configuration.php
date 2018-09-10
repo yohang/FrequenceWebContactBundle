@@ -23,13 +23,20 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('frequence_web_contact');
 
         $rootNode
-            ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('send_mails')->defaultTrue()->end()
-                ->scalarNode('to')->defaultValue(null)->end()
+                ->scalarNode('to')->defaultNull()->end()
                 ->scalarNode('from')->defaultValue('no-reply@example.com')->end()
-                ->scalarNode('subject')->defaultValue('contact.message.new')
-            ->end()
+                ->scalarNode('subject')->defaultNull()->end()
+                ->arrayNode('fixed_to_and_subject')
+                ->arrayPrototype()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('title')->end()
+                        ->scalarNode('email')->end()
+                        ->end()
+                    ->end()
+                ->end()
         ;
 
         return $treeBuilder;

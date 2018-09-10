@@ -33,10 +33,12 @@ class FrequenceWebContactExtension extends Extension
         $definition = $container->getDefinition('frequence_web_contact.email_listener');
         $definition->addArgument($config);
 
+        $container->setParameter( 'frequence_web_contact.fixed_to_and_subject', $config[ 'fixed_to_and_subject' ]);
+
         // If mail listener is activated
         if (true === $config['send_mails']) {
             // "To" field is mandatory
-            if (null === $config['to']) {
+            if (null === $config['to']  && count($config[ 'fixed_to_and_subject' ]) == 0) {
                 throw new \InvalidArgumentException('You have to define a "frequence_web_contact.to" address to use the email contact');
             }
             // Add the mail event listener to the dispatcher

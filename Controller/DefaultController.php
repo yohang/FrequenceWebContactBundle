@@ -48,6 +48,7 @@ class DefaultController implements ContainerAwareInterface
 
         if ($form->isValid()) {
             // Send the event for message handling (send mail, add to DB, don't care)
+
             $event = new MessageSubmitEvent($form->getData());
             $this->container->get('event_dispatcher')->dispatch(ContactEvents::onMessageSubmit, $event);
 
@@ -92,9 +93,18 @@ class DefaultController implements ContainerAwareInterface
      */
     protected function getForm()
     {
+        $subjects = $this->container->getParameter('frequence_web_contact.fixed_to_and_subject');
+
+        if(count($subjects) > 0) {
+            $options =  array("fixed_to_and_subject" => $this->container->getParameter('frequence_web_contact.fixed_to_and_subject'));
+        } else {
+            $options = array("fixed_to_and_subject" => array());
+        }
+
         return $this->container->get('form.factory')->create(
             $this->container->getParameter('frequence_web_contact.type'),
-            $this->container->get('frequence_web_contact.model')
+            $this->container->get('frequence_web_contact.model'),
+            $options
         );
     }
 }

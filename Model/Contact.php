@@ -27,7 +27,7 @@ class Contact
     /**
      * The message subject
      *
-     * @var string
+     * @var array
      */
     protected $subject;
 
@@ -87,20 +87,20 @@ class Contact
     }
 
     /**
-     * @param string $subject
+     * @return array
      */
-    public function setSubject($subject)
-    {
-        $this->subject = $subject;
+    public function getSubject() {
+        return $this->subject;
     }
 
     /**
-     * @return string
+     * @param array $subject
      */
-    public function getSubject()
-    {
-        return $this->subject;
+    public function setSubject( $subject ) {
+        $this->subject = $subject;
     }
+
+
 
     /**
      * Returns data that can be injected in the translating message subject
