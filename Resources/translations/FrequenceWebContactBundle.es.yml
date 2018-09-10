@@ -1,0 +1,14 @@
+contact:
+    submit:
+        button: Enviar
+        success: Tu mensaje ha sido enviado correctamente
+        failure: Tu mensaje no se ha podido enviar debido a algún fallo
+    message:
+        new: 'Nuevo mensaje de "%name%"'
+        sent:
+            you: Te ha enviado un mensaje
+form:
+    name: Nombre
+    email: Corre electrónico
+    subject: Asunto
+    body: Mensaje

@@ -11,6 +11,7 @@ framework:
         resource: %kernel.root_dir%/routing.yml
     templating:
         engines: [twig]
+    translator: []
     profiler: { only_exceptions: false }
 
 swiftmailer:
@@ -18,3 +19,11 @@ swiftmailer:
 
 frequence_web_contact:
     to: foo@bar.baz
+
+ewz_recaptcha:
+    public_key:  'recaptcha_public_key'
+    private_key: 'recaptcha_private_key'
+    enabled: true
+
+
+

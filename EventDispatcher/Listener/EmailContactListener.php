@@ -55,16 +55,26 @@ class EmailContactListener
     public function onMessageSubmit(MessageSubmitEvent $event)
     {
         $contact = $event->getContact();
+        if(count($this->config["fixed_to_and_subject"]) > 0) {
+            $selected_destination = $this->config["fixed_to_and_subject"][$contact->getSubject()];
+            $custom_subject = $selected_destination["title"].": ".$contact->getEmail();
+            $custom_to =  $selected_destination["email"];
+        } else {
+            $custom_subject = $contact->getSubject();
+            $custom_to = $this->config["to"];
+        }
+
+
 
         $message = new \Swift_Message($this->translator->trans(
-            $this->config['subject'],
+            $custom_subject,
             $contact->toTranslateArray(),
             'FrequenceWebContactBundle'
         ));
 
         $message->addFrom($this->config['from']);
         $message->addReplyTo($contact->getEmail(), $contact->getName());
-        $message->addTo($this->config['to']);
+        $message->addTo($custom_to);
         $message->addPart(
             $this->templating->render(
                 'FrequenceWebContactBundle:Mails:mail.html.twig',

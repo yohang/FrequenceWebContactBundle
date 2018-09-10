@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
             new \FrequenceWeb\Bundle\ContactBundle\FrequenceWebContactBundle(),
+            new \EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
         );
     }
 

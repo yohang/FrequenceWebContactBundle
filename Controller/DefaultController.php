@@ -3,6 +3,7 @@
 namespace FrequenceWeb\Bundle\ContactBundle\Controller;
 
 use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\ContactEvents;
+use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\ErrorMessageSubmit;
 use FrequenceWeb\Bundle\ContactBundle\EventDispatcher\Event\MessageSubmitEvent;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -47,6 +48,7 @@ class DefaultController implements ContainerAwareInterface
 
         if ($form->isValid()) {
             // Send the event for message handling (send mail, add to DB, don't care)
+
             $event = new MessageSubmitEvent($form->getData());
             $this->container->get('event_dispatcher')->dispatch(ContactEvents::onMessageSubmit, $event);
 
@@ -56,6 +58,9 @@ class DefaultController implements ContainerAwareInterface
 
             // Redirect somewhere
             return new RedirectResponse($this->container->get('session')->get('_fw_contact_referer'));
+        }else{
+            $event = new ErrorMessageSubmit($form->getData());
+            $this->container->get('event_dispatcher')->dispatch(ContactEvents::onErrorMessageSubmit, $event);
         }
 
         // Let say the user there's a problem
@@ -88,9 +93,18 @@ class DefaultController implements ContainerAwareInterface
      */
     protected function getForm()
     {
+        $subjects = $this->container->getParameter('frequence_web_contact.fixed_to_and_subject');
+
+        if(count($subjects) > 0) {
+            $options =  array("fixed_to_and_subject" => $this->container->getParameter('frequence_web_contact.fixed_to_and_subject'));
+        } else {
+            $options = array("fixed_to_and_subject" => array());
+        }
+
         return $this->container->get('form.factory')->create(
             $this->container->getParameter('frequence_web_contact.type'),
-            $this->container->get('frequence_web_contact.model')
+            $this->container->get('frequence_web_contact.model'),
+            $options
         );
     }
 }
